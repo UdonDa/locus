@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+<head> <!-- ← 追加 -->
+  <script src="{% static 'js/jquery.js' %}"></script>
+  <script src="{% static 'js/jquery.upload_thumbs.js' %}"></script>
+  <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}" />
+  <script>
+  $(function() {
+      // jQuery Upload Thumbs
+      $('form input:file').uploadThumbs({
+          position : 1,      // 0:before, 1:after, 2:parent.prepend, 3:parent.append,
+                             // any: arbitrarily jquery selector
+          imgbreak : true    // append <br> after thumbnail images
+      });
+  });
+  </script>
+  <link rel="stylesheet" type="text/css" href="{% static 'css/preview.css' %}" />
+</head>
+<span class="btn btn-primary">
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Upload</button>
+  </form>
+</span>
+
+  <p><a href="{% url 'home' %}">Return to home</a></p>
+{% endblock %}

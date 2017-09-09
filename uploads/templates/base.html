@@ -1,0 +1,42 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}" />
+    <meta charset="utf-8">
+    <title>Locus -模様替えしましょ♪-</title>
+    <div class="overlay bgMovie">
+      <video autoplay loop poster="{% static 'web/room.jpg' %}" id="bgvid">
+        <source src="{% static 'web/room.webm' %}" type="video/webm">
+      </video>
+    </div>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">Tutorial</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">polls</a></li>
+            <li class=""><a href="#">admin</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+    <style>
+    video#bgvid {
+  position: fixed; right: 0; bottom: 0;
+  min-width: 100%; min-height: 100%;
+  width: auto; height: auto; z-index: -100;
+  background: {% static 'web/room.jpg' %} no-repeat;
+  background-size: cover;
+}
+
+    </style>
+
+  </head>
+  <body>
+    {% block content %}
+    {% endblock %}
+  </body>
+</html>
