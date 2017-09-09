@@ -11,6 +11,7 @@ urlpatterns = [
     # url(r'^uploads/simple/$', views.simple_upload, name='simple_upload'),
     url(r'^uploads/form/$', views.model_form_upload, name='model_form_upload'),
     url(r'^admin/', admin.site.urls),
+    url(r'^uploads/complete/$', views.upload_complete, name='upload_complete'),
 ]
 
 if settings.DEBUG:

@@ -30,9 +30,19 @@ def model_form_upload(request):
         if form.is_valid():
             form.save()
             print('uploaded!')
-            return redirect('home')
+            return render(request, 'core/upload_complete.html', {
+                # 'picture': form.Meta.model.document,
+                'picture': form.Meta.model.thumbnail()
+            })
+            # return render(request, 'core/upload_complete.html', {
+            #     'form': form
+            # })
     else:
         form = DocumentForm()
     return render(request, 'core/model_form_upload.html', {
         'form': form
     })
+
+
+def upload_complete(request):
+    return render(request, 'core/upload_complete.html')
