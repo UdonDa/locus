@@ -4,6 +4,8 @@ from django.utils.html import format_html
 from .models import Document
 
 class ImageAdmin(admin.ModelAdmin):
-    list_display = ('thumbnail', 'document', 'description', 'uploaded_at')
+    # list_display = ('thumbnail', 'document', 'description', 'uploaded_at')
+    list_display = ('thumbnail', 'document', 'uploaded_at')
+
 
 admin.site.register(Document, ImageAdmin)
