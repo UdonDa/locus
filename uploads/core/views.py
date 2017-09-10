@@ -4,6 +4,7 @@ from django.core.files.storage import FileSystemStorage
 
 from uploads.core.models import Document
 from uploads.core.forms import DocumentForm
+import subprocess
 
 
 def home(request):
@@ -30,9 +31,18 @@ def model_form_upload(request):
         if form.is_valid():
             form.save()
             print('uploaded!')
+            items = []
+            img = Document.objects.latest("id")
+            file_name = img.document.name[10:]
+            subprocess.call('th ~/colorise.lua ' + '~/locus/media/' + img.document.name + ' ~/locus/media/document/result-' + file_name)
+            for item in Document.objects.all():
+                items.append({'image':item.document})
+    #        return render_to_response('home/view.html', {'items':items},
             return render(request, 'core/upload_complete.html', {
                 # 'picture': form.Meta.model.document,
-                'picture': form.Meta.model.thumbnail()
+                'items': items,
+                'img': img.document.url,
+                'name': file_name
             })
             # return render(request, 'core/upload_complete.html', {
             #     'form': form
@@ -43,6 +53,7 @@ def model_form_upload(request):
         'form': form
     })
 
+#context_instance=RequestContext(request))
 
 def upload_complete(request):
     return render(request, 'core/upload_complete.html')
